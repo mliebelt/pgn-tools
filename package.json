@@ -1,0 +1,51 @@
+{
+  "name": "@mliebelt/pgn-tools",
+  "version": "0.9.0",
+  "author": "mliebelt",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mliebelt/pgn-tools.git"
+  },
+  "keywords": [
+    "chess",
+    "pgn"
+  ],
+  "bin": "./bin/pgn-tools.js",
+  "homepage": "https://github.com/mliebelt/pgn-tools/blob/master/README.md",
+  "main": "lib/index.umd.js",
+  "module": "lib/index.umd.js",
+  "types": "lib/index.umd.d.ts",
+  "dependencies": {
+    "@mliebelt/pgn-types": "^1.0.4",
+    "@mliebelt/pgn-parser": "^1.4.13",
+    "@mliebelt/pgn-writer": "^1.0.5"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup-plugin-dts": "^6.1.0",
+    "@types/mocha": "^10.0.4",
+    "@types/node": "^20.9.1",
+    "mocha": "^10.2.0",
+    "peggy": "^3.0.2",
+    "rollup": "^4.5.0",
+    "should": "^13.2.3",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "clean": "rm -fr lib/*",
+    "build": "npm run clean && npm run mjs && npm run umd && npm run dts",
+    "mjs": "tsc -p tsconfig-mjs.json",
+    "cjs": "tsc -p tsconfig.json",
+    "umd": "rollup lib/mjs/index.js -c rollup.config.mjs -o lib/index.umd.js -f umd",
+    "dts": "rollup -c rollup.config-dts.mjs",
+    "test": "mocha  --require ts-node/register ./test/**/*.ts",
+    "test-interactive": "mocha -w ./test/**/*.ts",
+    "prepare": "npm run build && npm test",
+    "pgnp-duplicates": "node ./bin/pgnp-duplicates.js"
+
+  }
+}
