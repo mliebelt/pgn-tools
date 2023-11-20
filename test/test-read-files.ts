@@ -2,6 +2,8 @@ import {beforeEach, describe} from "mocha";
 import should = require('should')
 import {readFiles, sort} from "../src"
 import { parseGames } from "@mliebelt/pgn-parser"
+import {unlink, unlinkSync} from 'fs'
+import path = require('path')
 
 describe('When using readFiles with no map for file names', () => {
     let stdin
@@ -73,5 +75,36 @@ describe('When using readFiles with maps for file names', () => {
         should.throws(() => {
             readFiles(['test/fixtures/test1.pgn', 'test/fixtures/test-missing.pgn'], { mapInput: true })
         })
+    })
+})
+
+describe("When handling errors in reading files", () => {
+    beforeEach( () => {
+        // @ts-ignore
+        //process.chdir(path.dirname(require.main.filename));
+        async function deleteFile(filePath) {
+            try {
+                await unlinkSync(filePath)
+            } catch (err) {  }
+        }
+        deleteFile('./read.log');
+    })
+
+    it('should throw error on missing file', () => {
+        should.throws(() => {
+            readFiles(['test/fixtures/test-missing.pgn'], { mapInput: true })
+        })
+    })
+    it('should read all files if possible, and warn when missing files', () => {
+        let result = readFiles(['test/fixtures/test1.pgn', 'test/fixtures/test-missing.pgn'], { mapInput: true, errorHandling: 'warn' }) as Map<string, string>
+        should.exist(result)
+        should(result.get('test/fixtures/test1.pgn')).eql('e4 * d4 * c4 *')
+        should(result.size).eql(2)
+    })
+    it('should read all files if possible, and log when missing files', () => {
+        let result = readFiles(['test/fixtures/test1.pgn', 'test/fixtures/test-missing.pgn'], { mapInput: true, errorHandling: 'log' }) as Map<string, string>
+        should.exist(result)
+        should(result.get('test/fixtures/test1.pgn')).eql('e4 * d4 * c4 *')
+        should(result.size).eql(2)
     })
 })

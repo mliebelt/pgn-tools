@@ -21,4 +21,5 @@ export type SortOptions = {
 
 export type ReadOptions = {
     mapInput?: boolean
+    errorHandling?: "warn" | "log" | "silent"
 }

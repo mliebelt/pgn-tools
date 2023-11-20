@@ -4,6 +4,8 @@ import {ParseTree} from "@mliebelt/pgn-parser"
 import {ReadOptions, SortOptions, StripOptions} from "./types"
 import fs from "fs"
 import path from "path"
+import { createWriteStream } from "fs"
+import { format } from "date-fns"
 
 /**
  * Reads PGN files and returns the input without parsing it. There are 2 ways to read files:
@@ -16,11 +18,34 @@ import path from "path"
  * @returns Array of input strings or map of file names to input strings.
  */
 export function readFiles(files: string[], options: ReadOptions = { mapInput: false }): string[] | Map<string, string> {
+    function handleReadException(e, stdin: string, errorHandling: "warn" | "log" | "silent" | undefined) {
+        if (errorHandling === "silent") {
+            return
+        }
+        if (errorHandling === "warn") {
+            console.warn(e.message)
+            return
+        }
+        if (errorHandling === "log") {
+            const logStream = createWriteStream('./read.log')
+            const timestamp = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+            const message = `${timestamp} ERROR: ${e.message}`;
+            logStream.write(`${message}\n`)
+            return
+        }
+        throw e
+    }
+
     if (files.length === 0) { // no files given, read from stdin
-        const fileContent = fs
-            .readFileSync(0)
-            .toString()
-            .trim();
+        let fileContent
+        try {
+            fileContent = fs
+                .readFileSync(0)
+                .toString()
+                .trim();
+        } catch (e) {
+            handleReadException(e, "STDIN", options.errorHandling)
+        }
         if (options.mapInput) {
             const map: Map<string, string> = new Map();
             map.set('STDIN', fileContent);
@@ -32,10 +57,15 @@ export function readFiles(files: string[], options: ReadOptions = { mapInput: fa
     let resultArray: string[] = []
     let resultMap: Map<string, string> = new Map();
     for (const file of files) {
-        const fileContent = fs
-            .readFileSync(path.resolve(file))
-            .toString()
-            .trim();
+        let fileContent
+        try {
+            fileContent = fs
+                .readFileSync(path.resolve(file))
+                .toString()
+                .trim();
+        } catch (e) {
+            handleReadException(e, file, options.errorHandling)
+        }
         if (options.mapInput) {
             resultMap.set(file, fileContent);
         } else {
