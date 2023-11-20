@@ -17,20 +17,21 @@
   "module": "lib/index.umd.js",
   "types": "lib/index.umd.d.ts",
   "dependencies": {
-    "@mliebelt/pgn-types": "^1.0.4",
     "@mliebelt/pgn-parser": "^1.4.13",
+    "@mliebelt/pgn-types": "^1.0.4",
     "@mliebelt/pgn-writer": "^1.0.5",
     "commander": "^11.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "rollup-plugin-dts": "^6.1.0",
     "@types/mocha": "^10.0.4",
     "@types/node": "^20.9.1",
     "mocha": "^10.2.0",
+    "mock-stdin": "^1.0.0",
     "peggy": "^3.0.2",
     "rollup": "^4.5.0",
+    "rollup-plugin-dts": "^6.1.0",
     "should": "^13.2.3",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.1",
@@ -47,6 +48,5 @@
     "test-interactive": "mocha -w ./test/**/*.ts",
     "prepare": "npm run build && npm test",
     "pgnp-duplicates": "node ./bin/pgnp-duplicates.js"
-
   }
 }
