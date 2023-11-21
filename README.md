@@ -11,3 +11,9 @@ So the pgn-tools will do the following:
 * Provide Javascript/Typescript functions that can be used in any project.
 * Provide a command line tool that can be used in any shell.
 * Provide useful subcommands with different options per subcommand.
+
+## Current Implementation
+
+The current implementation is very early, but I want to provide some overview of what was already achieved, and what will be next.
+
+* `readFile`: Sufficiently well implemented, should be usable directly by other commands then.
