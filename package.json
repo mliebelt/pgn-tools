@@ -17,7 +17,7 @@
   "module": "lib/index.umd.js",
   "types": "lib/index.umd.d.ts",
   "dependencies": {
-    "@mliebelt/pgn-parser": "^1.4.13",
+    "@mliebelt/pgn-parser": "^1.4.14",
     "@mliebelt/pgn-types": "^1.0.4",
     "@mliebelt/pgn-writer": "^1.0.5",
     "commander": "^11.1.0",
