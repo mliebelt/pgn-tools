@@ -21,7 +21,7 @@
     "@mliebelt/pgn-types": "^1.0.4",
     "@mliebelt/pgn-writer": "^1.0.5",
     "commander": "^11.1.0",
-    "date-fns": "^3.0.6"
+    "date-fns": "^3.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
