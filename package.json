@@ -36,7 +36,7 @@
     "should": "^13.2.3",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "scripts": {
     "clean": "rm -fr lib/*",
