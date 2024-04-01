@@ -1,5 +1,5 @@
 const program = require('commander');
-const { readFiles } = require('..')
+const { readGames } = require('..')
 
 program
     .option('-f, --files <files...>', 'Files to sort')
@@ -10,4 +10,4 @@ program.parse(process.argv)
 const opts = program.opts()
 console.log(`Files:  ${opts.files} Map: ${opts.map}`)
 
-console.log(readFiles(opts.files || [], { mapInput: opts.map } ))
+console.log(readGames(opts.files || [], { mapInput: opts.map } ))

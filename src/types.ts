@@ -1,15 +1,15 @@
+import {ParseTree} from "@mliebelt/pgn-parser";
+
 export type StripOptions = {
-    comments?: boolean,
-    nags?: boolean,
+    nocomments?: boolean,
+    nonags?: boolean,
     illegalMoves?: boolean,
     illegalNags?: boolean,
     illegalComments?: boolean,
-    annotations?: boolean,
+    noannotations?: boolean,
     moveNumbers?: boolean,
-    tagPairs?: string[],
-    timeControls?: boolean,
-    gameTermination?: boolean,
-    variation?: boolean,
+    notags?: string[],
+    novariants?: boolean,
     all?: boolean
 }
 
@@ -23,3 +23,12 @@ export type ReadOptions = {
     mapInput?: boolean
     errorHandling?: "warn" | "log" | "silent"
 }
+
+export type WriteOptions = {
+    prefix?: string,
+    suffix?: string,
+    toFile?: boolean
+}
+
+export type ParseResult = ParseTree[] | MappedParseTrees
+export type MappedParseTrees = Map<string,ParseTree[]>

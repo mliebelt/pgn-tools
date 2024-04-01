@@ -12,4 +12,5 @@ program.parse(process.argv)
 
 const opts = program.opts()
 
-console.log(`files: ${opts.files}`)
+console.log(`files: ${JSON.stringify(opts)}`)
+

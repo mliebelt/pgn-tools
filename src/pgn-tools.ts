@@ -1,7 +1,7 @@
 /* Dummy file */
-import {PgnGame} from "@mliebelt/pgn-types";
+import {PgnMove} from "@mliebelt/pgn-types";
 import {ParseTree} from "@mliebelt/pgn-parser"
-import {ReadOptions, SortOptions, StripOptions} from "./types"
+import {MappedParseTrees, ParseResult, ReadOptions, SortOptions, StripOptions} from "./types"
 import fs from "fs"
 import path from "path"
 import { createWriteStream } from "fs"
@@ -86,14 +86,52 @@ export function sort(games: ParseTree[], options: SortOptions = {orderAscending:
     return [];
 }
 
+
 /**
- * Strips metadata from PGN games according to options.
- *
- * @param games - Array of PgnParseTree objects to strip metadata from.
- * @param options - Options for what metadata to strip. Default is to strip all but mainline.
- * @returns Array of stripped PgnParseTree objects.
+ * Iterate over a ParseResult and apply a callback to each game. This looping mechanism ensures, that the logic done inside (working on a game) is independent of the type of the games parameter.
+ * @param games - Array of PgnParseTree objects, or Map of file names to PgnParseTree objects.
+ * @param callback - Callback to apply to each game. Has as only argument the ParseTree, and returns all the time the ParseTree.
  */
-export function strip(games: ParseTree[], options: StripOptions = {all: true}) {
-    // TODO: implement stripping logic
-    return [];
+export function iterateParseResult(games: ParseResult, callback: (game: ParseTree, file?: string) => ParseTree) {
+    if (Array.isArray(games)) {
+        let tmp : ParseTree[] = []
+        for (const game of games) {
+            tmp.push(callback(game))
+        }
+        return tmp
+    } else {
+        let tmp : MappedParseTrees = new Map()
+        for (const file of games.keys()) {
+            const mts = games.get(file)
+            let tmppt : ParseTree[] = []
+            // @ts-ignore
+            for (const game of games.get(file)) {
+                tmppt.push(callback(game, file))
+            }
+            tmp.set(file, tmppt)
+        }
+        return tmp
+    }
+}
+
+/** Iterate recursively over moves, ensure that for each move
+ *  1. the callback is called
+ *  2. for all moves in variations the callback is called
+ *  3. and the recursive call is done then
+ *
+ * @param game - the game for which all moves have to be iterated
+ * @param callback - the callback to call with one argument, the move given
+ */
+export function iterateMoves(game: ParseTree, callback: (move: PgnMove) => void) {
+    function iterateVariations(move2: PgnMove) {
+        callback(move2)
+        for (let variation of move2.variations) {
+            for (let vMove of variation) {
+                iterateVariations(vMove)
+            }
+        }
+    }
+    for (let move of game.moves) {
+        iterateVariations(move)
+    }
 }
