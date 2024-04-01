@@ -23,3 +23,11 @@ So the pgn-tools will do the following:
 The current implementation is very early, but I want to provide some overview of what was already achieved, and what will be next.
 
 * `readFile`: Sufficiently well implemented, should be usable directly by other commands then.
+
+## Development
+
+To develop the files locally, you have to ensure to do the following before calling the files in directory `bin`:
+
+1. `npm install` to have everything available.
+2. `npm link` that creates local links to your declared bin files (see `package.json`, there `bin` what can be called).
+3. Use the files then locally in the root of the repository: `npm-read -f game1.pgn`.

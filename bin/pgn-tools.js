@@ -1,4 +1,5 @@
-const program = require('commander');
+#!/usr/bin/env node
+const { program } = require('commander');
 
 program
   .command('read -f <files> <options>', 'read pgn files', { executableFile: './pgn-read.js' })

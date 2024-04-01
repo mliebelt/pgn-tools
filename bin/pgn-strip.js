@@ -1,4 +1,5 @@
-const program = require('commander');
+#!/usr/bin/env node
+const { program } = require('commander');
 
 program
     .option('-f, --files <files...>', 'files to strip according to other options')
