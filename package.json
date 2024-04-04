@@ -23,7 +23,7 @@
   "types": "lib/index.umd.d.ts",
   "dependencies": {
     "@mliebelt/pgn-parser": "^1.4.14",
-    "@mliebelt/pgn-reader": "^1.2.25",
+    "@mliebelt/pgn-reader": "^1.2.27",
     "@mliebelt/pgn-types": "^1.0.4",
     "@mliebelt/pgn-writer": "^1.0.5",
     "commander": "^12.0.0",
