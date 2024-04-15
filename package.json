@@ -37,7 +37,7 @@
     "mocha": "^10.4.0",
     "mock-stdin": "^1.0.0",
     "peggy": "^4.0.2",
-    "rollup": "^4.14.1",
+    "rollup": "^4.14.2",
     "rollup-plugin-dts": "^6.1.0",
     "should": "^13.2.3",
     "ts-loader": "^9.5.1",
