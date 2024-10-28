@@ -33,7 +33,7 @@
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@types/mocha": "^10.0.9",
-    "@types/node": "^22.7.9",
+    "@types/node": "^22.8.1",
     "mocha": "^10.7.3",
     "mock-stdin": "^1.0.0",
     "peggy": "^4.1.1",
