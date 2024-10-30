@@ -1,6 +1,6 @@
 {
   "name": "@mliebelt/pgn-tools",
-  "version": "0.9.0",
+  "version": "0.9.2",
   "author": "mliebelt",
   "license": "Apache-2.0",
   "repository": {
@@ -22,27 +22,26 @@
   "module": "lib/index.umd.js",
   "types": "lib/index.umd.d.ts",
   "dependencies": {
-    "@mliebelt/pgn-parser": "^1.4.15",
-    "@mliebelt/pgn-reader": "^1.2.29",
+    "@mliebelt/pgn-parser": "^1.4.14",
+    "@mliebelt/pgn-reader": "^1.2.28",
     "@mliebelt/pgn-types": "^1.0.4",
     "@mliebelt/pgn-writer": "^1.0.5",
-    "commander": "^12.1.0",
-    "date-fns": "^4.1.0"
+    "commander": "^12.0.0",
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
-    "@types/mocha": "^10.0.9",
-    "@types/node": "^22.8.4",
-    "mocha": "^10.7.3",
+    "@types/node": "^20.12.2",
     "mock-stdin": "^1.0.0",
-    "peggy": "^4.1.1",
+    "peggy": "^4.0.2",
     "rollup": "^4.24.3",
     "rollup-plugin-dts": "^6.1.1",
-    "should": "^13.2.3",
+    "tsm": "^2.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.4.3",
+    "uvu": "^0.5.6"
   },
   "scripts": {
     "clean": "rm -fr lib/*",
@@ -51,8 +50,7 @@
     "cjs": "tsc -p tsconfig.json",
     "umd": "rollup lib/mjs/index.js -c rollup.config.mjs -o lib/index.umd.js -f umd",
     "dts": "rollup -c rollup.config-dts.mjs",
-    "test": "mocha  --require ts-node/register ./test/**/*.ts",
-    "test-interactive": "mocha -w ./test/**/*.ts",
+    "test": "uvu -r tsm test",
     "prepare": "npm run build && npm test",
     "pgnp-duplicates": "node ./bin/pgnp-duplicates.js"
   }

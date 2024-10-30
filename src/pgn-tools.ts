@@ -14,8 +14,9 @@ import { format } from "date-fns"
  *
  * If there are no files given, the input will be taken from stdin.
  *
- * @param files - Array of file paths to read.
- * @returns Array of input strings or map of file names to input strings.
+ * @param {string[]} files - Array of file paths to read.
+ * @param {ReadOptions} [options={ mapInput: false }] - Options for reading files.
+ * @returns {string[]|Map<string, string>} - Array of input strings or map of file names to input strings.
  */
 export function readFiles(files: string[], options: ReadOptions = { mapInput: false }): string[] | Map<string, string> {
     function handleReadException(e, stdin: string, errorHandling: "warn" | "log" | "silent" | undefined) {
@@ -37,39 +38,39 @@ export function readFiles(files: string[], options: ReadOptions = { mapInput: fa
     }
 
     if (files.length === 0) { // no files given, read from stdin
-        let fileContent
+        let fileContent: string
         try {
             fileContent = fs
                 .readFileSync(0)
                 .toString()
                 .trim();
+            if (options.mapInput) {
+                const map: Map<string, string> = new Map();
+                map.set('STDIN', fileContent);
+                return map
+            } else {
+                return [fileContent]
+            }
         } catch (e) {
             handleReadException(e, "STDIN", options.errorHandling)
-        }
-        if (options.mapInput) {
-            const map: Map<string, string> = new Map();
-            map.set('STDIN', fileContent);
-            return map
-        } else {
-            return [fileContent]
         }
     }
     let resultArray: string[] = []
     let resultMap: Map<string, string> = new Map();
     for (const file of files) {
-        let fileContent
+        let fileContent: string
         try {
             fileContent = fs
                 .readFileSync(path.resolve(file))
                 .toString()
                 .trim();
+            if (options.mapInput) {
+                resultMap.set(file, fileContent);
+            } else {
+                resultArray.push(fileContent);
+            }
         } catch (e) {
             handleReadException(e, file, options.errorHandling)
-        }
-        if (options.mapInput) {
-            resultMap.set(file, fileContent);
-        } else {
-            resultArray.push(fileContent);
         }
     }
     return options.mapInput ? resultMap : resultArray;
@@ -79,6 +80,7 @@ export function readFiles(files: string[], options: ReadOptions = { mapInput: fa
  * Sorts an array of PGN parse trees.
  *
  * @param games - Array of PgnParseTree objects to sort.
+ * @param options - optional parameter of sort options, with default ascending == true
  * @returns Sorted array of PgnParseTree objects.
  */
 export function sort(games: ParseTree[], options: SortOptions = {orderAscending: true}) {

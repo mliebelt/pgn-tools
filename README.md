@@ -17,6 +17,12 @@ So the pgn-tools will do the following:
 * Provide Javascript/Typescript functions that can be used in any project.
 * Provide a command line tool that can be used in any shell.
 * Provide useful subcommands with different options per subcommand.
+* Have an understandable API with good naming. Each part of functionality should go into different files, where each file includes sufficient information what to expect here.
+
+To allow that, we have to define for which parts we use which words.
+
+* `parse`: Read the game from a string/file, and return the parse tree as computed by `pgn-parser`. No additional validation/checking/... is done here. This will be much faster than the other option. All exported functions of `pgn-parser` are exported without a change.
+* `read`: Parse the game as usual, but validate the moves by the `pgn-reader`. You will get at the end a validated game, with additional information computed during that validation. It will of course more costly than only parsing. All input is read from files synchronously, because all tool functionality should be used in scripts (locally), and not in the browser.
 
 ## Current Implementation
 

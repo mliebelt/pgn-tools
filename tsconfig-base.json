@@ -16,9 +16,9 @@
 //    "skipLibCheck": true,
     "strict": true,
     "traceResolution": false,
-    "types": ["node", "mocha"],
+    "types": ["node"],
     "typeRoots": ["./node_modules/@types"]
   },
   "exclude": ["./node_modules", "./lib", "./test"],
-  "include": ["src/pgn-tools.ts", "src/index.ts"]
+  "include": ["src/**/*.ts"]
 }
