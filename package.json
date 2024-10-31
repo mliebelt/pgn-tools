@@ -32,7 +32,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
-    "@types/node": "^20.12.2",
+    "@types/node": "^22.8.4",
     "mock-stdin": "^1.0.0",
     "peggy": "^4.0.2",
     "rollup": "^4.24.3",
