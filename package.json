@@ -37,7 +37,7 @@
     "rollup": "^4.47.1",
     "rollup-plugin-dts": "^6.2.3",
     "tsm": "^2.0.0",
-    "ts-loader": "^9.5.2",
+    "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "uvu": "^0.5.6"
