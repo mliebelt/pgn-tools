@@ -22,7 +22,7 @@
   "module": "lib/index.umd.js",
   "types": "lib/index.umd.d.ts",
   "dependencies": {
-    "@mliebelt/pgn-parser": "^1.4.18",
+    "@mliebelt/pgn-parser": "^1.4.19",
     "@mliebelt/pgn-reader": "^1.2.30",
     "@mliebelt/pgn-types": "^1.0.4",
     "@mliebelt/pgn-writer": "^1.0.5",
