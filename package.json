@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
-    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-node-resolve": "^16.0.2",
     "@types/node": "^24.7.0",
     "mock-stdin": "^1.0.0",
     "rollup": "^4.52.3",
