@@ -36,10 +36,10 @@
     "mock-stdin": "^1.0.0",
     "rollup": "^4.60.1",
     "rollup-plugin-dts": "^6.4.1",
-    "tsm": "^2.0.0",
     "ts-loader": "^9.5.7",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
+    "tsm": "^2.0.0",
+    "typescript": "^6.0.2",
     "uvu": "^0.5.6"
   },
   "scripts": {
