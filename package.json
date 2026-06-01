@@ -36,7 +36,7 @@
     "mock-stdin": "^1.0.0",
     "rollup": "^4.60.4",
     "rollup-plugin-dts": "^6.4.1",
-    "ts-loader": "^9.5.7",
+    "ts-loader": "^9.6.0",
     "ts-node": "^10.9.2",
     "tsm": "^2.0.0",
     "typescript": "^6.0.3",
