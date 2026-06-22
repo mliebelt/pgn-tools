@@ -34,7 +34,7 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/node": "^26.0.0",
     "mock-stdin": "^1.0.0",
-    "rollup": "^4.62.0",
+    "rollup": "^4.62.2",
     "rollup-plugin-dts": "^6.4.1",
     "ts-loader": "^9.6.1",
     "ts-node": "^10.9.2",
